@@ -1,0 +1,88 @@
+# ================================================
+# BEFA Press - Application Configuration
+# ================================================
+
+spring:
+  application:
+    name: befa-press
+
+  # Database Configuration
+  datasource:
+    url: jdbc:mysql://localhost:3306/befa_press?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 300000
+      connection-timeout: 20000
+
+  # JPA Configuration
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  # Email Configuration
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  # File Upload Configuration
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+# Server Configuration
+server:
+  port: 9090
+  servlet:
+    context-path: /
+
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: 86400000 # 24 hours in milliseconds
+  refresh-expiration: 604800000 # 7 days in milliseconds
+
+# OTP Configuration
+otp:
+  expiry-minutes: 5
+  length: 6
+
+# Application Configuration
+app:
+  cors:
+    allowed-origins: http://localhost:3000,http://localhost:5173,http://localhost:8081,http://localhost:8082,http://localhost:8083,http://localhost:8084,http://localhost:19006
+  upload:
+    path: ${UPLOAD_PATH:./uploads}
+  base-url: ${BASE_URL:http://localhost:9090}
+
+# Logging Configuration
+logging:
+  level:
+    com.befapress: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+
+# Swagger/OpenAPI Configuration
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true

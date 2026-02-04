@@ -1,0 +1,37 @@
+﻿
+Num Method Path                                      
+--- ------ ----                                      
+  1 GET    /overview                                 
+  2 GET    /metrics/views?period=7d                  
+  3 GET    /metrics/session-duration                 
+  4 GET    /metrics/bounce-rate                      
+  5 GET    /metrics/subscribers                      
+  6 GET    /traffic/daily?from=2026-01-01&to=2026-...
+  7 GET    /traffic/monthly?year=2026                
+  8 GET    /traffic/sources                          
+  9 GET    /traffic/realtime                         
+ 10 GET    /top-articles?limit=5                     
+ 11 GET    /top-authors?limit=5                      
+ 12 GET    /categories                               
+ 13 GET    /article/1/stats                          
+ 14 GET    /trending                                 
+ 15 GET    /users/growth?period=30d                  
+ 16 GET    /users/retention                          
+ 17 GET    /comments/activity                        
+ 18 GET    /comments/top-users                       
+ 19 GET    /shares                                   
+ 20 GET    /audience/devices                         
+ 21 GET    /audience/geo                             
+ 22 GET    /audience/languages                       
+ 23 GET    /audience/roles                           
+ 24 GET    /ads/performance                          
+ 25 GET    /ads/ctr                                  
+ 26 GET    /technical/page-load                      
+ 27 GET    /technical/errors                         
+ 28 POST   /track                                    
+ 29 POST   /track/scroll                             
+ 30 POST   /track/share                              
+ 31 POST   /track/session                            
+
+
+

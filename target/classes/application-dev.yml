@@ -1,0 +1,19 @@
+# ================================================
+# BEFA Press - Development Configuration
+# ================================================
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  # H2 Console for development (optional)
+  h2:
+    console:
+      enabled: false
+
+logging:
+  level:
+    com.befapress: DEBUG
+    org.springframework.security: DEBUG

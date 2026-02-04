@@ -1,0 +1,22 @@
+# Development Dockerfile for Backend
+FROM maven:3.9-eclipse-temurin-17-alpine
+
+WORKDIR /app
+
+# Copy pom.xml and dependency list to cache dependencies
+COPY pom.xml .
+# Download dependencies (this layer is cached if pom.xml doesn't change)
+RUN mvn dependency:go-offline
+
+# Copy source code (this will be overridden by volume mount, but good for initial build)
+COPY src ./src
+
+# Create uploads directory
+RUN mkdir -p /app/uploads
+
+# Expose port
+EXPOSE 9090
+
+# Command to run Spring Boot in development mode
+# Using spring-boot:run enables hot reloading with DevTools
+CMD ["mvn", "spring-boot:run", "-Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005'"]
