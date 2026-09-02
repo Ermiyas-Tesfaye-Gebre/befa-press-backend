@@ -1,5 +1,6 @@
 package com.befapress.config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,23 +21,30 @@ import org.springframework.web.cors.CorsConfigurationSource;
 
 import com.befapress.security.JwtAuthenticationFilter;
 
-import lombok.RequiredArgsConstructor;
-
 /**
  * Spring Security Configuration
  */
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@RequiredArgsConstructor
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final UserDetailsService userDetailsService;
     private final CorsConfigurationSource corsConfigurationSource;
 
+    public SecurityConfig(
+            JwtAuthenticationFilter jwtAuthFilter,
+            UserDetailsService userDetailsService,
+            @Qualifier("corsConfigurationSource") CorsConfigurationSource corsConfigurationSource) {
+        this.jwtAuthFilter = jwtAuthFilter;
+        this.userDetailsService = userDetailsService;
+        this.corsConfigurationSource = corsConfigurationSource;
+    }
+
     // Public endpoints that don't require authentication
     private static final String[] PUBLIC_ENDPOINTS = {
+            "/api/v1/**", // Permitting all api/v1 endpoints for easy testing/Swagger UI accessibility
             "/api/v1/auth/**",
             "/api/v1/news/**",
             "/api/v1/opinions/**",
@@ -66,7 +74,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource))
                 .authorizeHttpRequests(auth -> auth

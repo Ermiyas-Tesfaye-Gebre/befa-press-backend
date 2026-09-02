@@ -40,8 +40,8 @@ public class CategoryController {
     @Operation(summary = "Get news by category")
     public ResponseEntity<PageResponse<NewsListResponse>> getNewsByCategory(
             @PathVariable String slug,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size) {
         PageResponse<NewsListResponse> response = newsService.getNewsByCategory(slug, page, size);
         return ResponseEntity.ok(response);
     }

@@ -27,9 +27,9 @@ public class NewsController {
     @GetMapping
     @Operation(summary = "Get all published news with pagination")
     public ResponseEntity<PageResponse<NewsListResponse>> getAllNews(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "publishedAt") String sortBy) {
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size,
+            @RequestParam(name = "sortBy", defaultValue = "publishedAt") String sortBy) {
         PageResponse<NewsListResponse> response = newsService.getAllPublishedNews(page, size, sortBy);
         return ResponseEntity.ok(response);
     }
@@ -58,7 +58,7 @@ public class NewsController {
     @GetMapping("/breaking")
     @Operation(summary = "Get breaking news")
     public ResponseEntity<List<NewsListResponse>> getBreakingNews(
-            @RequestParam(defaultValue = "5") int limit) {
+            @RequestParam(name = "limit", defaultValue = "5") int limit) {
         List<NewsListResponse> response = newsService.getBreakingNews(limit);
         return ResponseEntity.ok(response);
     }
@@ -73,7 +73,7 @@ public class NewsController {
     @GetMapping("/trending")
     @Operation(summary = "Get trending news")
     public ResponseEntity<List<NewsListResponse>> getTrendingNews(
-            @RequestParam(defaultValue = "10") int limit) {
+            @RequestParam(name = "limit", defaultValue = "10") int limit) {
         List<NewsListResponse> response = newsService.getTrendingNews(limit);
         return ResponseEntity.ok(response);
     }
@@ -82,7 +82,7 @@ public class NewsController {
     @Operation(summary = "Get related news articles")
     public ResponseEntity<List<NewsListResponse>> getRelatedNews(
             @PathVariable Long id,
-            @RequestParam(defaultValue = "5") int limit) {
+            @RequestParam(name = "limit", defaultValue = "5") int limit) {
         List<NewsListResponse> response = newsService.getRelatedNews(id, limit);
         return ResponseEntity.ok(response);
     }
@@ -90,9 +90,9 @@ public class NewsController {
     @GetMapping("/search")
     @Operation(summary = "Search news articles")
     public ResponseEntity<PageResponse<NewsListResponse>> searchNews(
-            @RequestParam String q,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+            @RequestParam(name = "q") String q,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size) {
         PageResponse<NewsListResponse> response = newsService.searchNews(q, page, size);
         return ResponseEntity.ok(response);
     }

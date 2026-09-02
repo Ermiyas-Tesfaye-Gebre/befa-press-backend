@@ -72,5 +72,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
         @Query("SELECT COUNT(u) FROM User u WHERE u.role.name = :roleName")
         Long countByRoleName(@Param("roleName") String roleName);
 
+        @Query("SELECT u FROM User u WHERE u.faceDescriptor IS NOT NULL AND u.faceDescriptor <> ''")
+        java.util.List<User> findAllWithFaceDescriptor();
+
         long countByDeletedAtIsNull();
 }

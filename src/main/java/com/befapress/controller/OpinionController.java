@@ -28,8 +28,8 @@ public class OpinionController {
     @GetMapping
     @Operation(summary = "Get all published opinions with pagination")
     public ResponseEntity<PageResponse<OpinionResponse>> getAllOpinions(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size) {
         PageResponse<OpinionResponse> response = opinionService.getAllPublishedOpinions(page, size);
         return ResponseEntity.ok(response);
     }
@@ -66,8 +66,8 @@ public class OpinionController {
     @Operation(summary = "Get opinions by author")
     public ResponseEntity<PageResponse<OpinionResponse>> getOpinionsByAuthor(
             @PathVariable Long authorId,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size) {
         PageResponse<OpinionResponse> response = opinionService.getOpinionsByAuthor(authorId, page, size);
         return ResponseEntity.ok(response);
     }
@@ -75,9 +75,9 @@ public class OpinionController {
     @GetMapping("/search")
     @Operation(summary = "Search opinions by title or content")
     public ResponseEntity<PageResponse<OpinionResponse>> searchOpinions(
-            @RequestParam String q,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+            @RequestParam(name = "q") String q,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size) {
         PageResponse<OpinionResponse> response = opinionService.searchOpinions(q, page, size);
         return ResponseEntity.ok(response);
     }

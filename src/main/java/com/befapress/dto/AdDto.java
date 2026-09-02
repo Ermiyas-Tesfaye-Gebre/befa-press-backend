@@ -15,9 +15,12 @@ public class AdDto {
     private String title;
     private String adType;
     private String placementZone;
+    private String adSize;
+    private String adBehavior;
     private String imageUrl;
     private String videoUrl;
     private String targetUrl;
+    private String mediaTransformation;
     private String scriptContent;
     private String heading;
     private String description;

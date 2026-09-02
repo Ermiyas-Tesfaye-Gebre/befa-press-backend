@@ -129,19 +129,14 @@ public class AuthService {
                         com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
                         float[] newDescriptor = mapper.readValue(newDescriptorJson, float[].class);
 
-                        java.util.List<User> intellectuals = userRepository.findAll(); // Optimization needed for
-                                                                                       // production
+                        java.util.List<User> intellectuals = userRepository.findAllWithFaceDescriptor();
 
                         for (User existingUser : intellectuals) {
-                                if (existingUser.getFaceDescriptor() != null
-                                                && !existingUser.getFaceDescriptor().isEmpty()) {
-                                        float[] existingDescriptor = mapper.readValue(existingUser.getFaceDescriptor(),
-                                                        float[].class);
-                                        if (calculateEuclideanDistance(newDescriptor, existingDescriptor) < 0.5) { // Strict
-                                                                                                                   // threshold
-                                                throw new BadRequestException(
-                                                                "Duplicate identity detected. You are already registered.");
-                                        }
+                                float[] existingDescriptor = mapper.readValue(existingUser.getFaceDescriptor(),
+                                                float[].class);
+                                if (calculateEuclideanDistance(newDescriptor, existingDescriptor) < 0.5091) {
+                                        throw new BadRequestException(
+                                                        "Duplicate identity detected. You are already registered.");
                                 }
                         }
                 } catch (Exception e) {

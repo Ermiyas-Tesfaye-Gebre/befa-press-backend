@@ -1,4 +1,5 @@
 com\befapress\controller\AuthControllerTest.class
+com\befapress\controller\MobileEndpointsTest.class
 com\befapress\controller\NewsControllerTest.class
 com\befapress\BefaPressApplicationTests.class
 com\befapress\controller\RefreshTokenIntegrationTest.class

@@ -37,14 +37,35 @@ public class Advertisement {
 
     /**
      * Placement Zone:
-     * - HOME_BANNER (Top of home)
-     * - SIDEBAR (Right sidebar)
-     * - IN_ARTICLE (Middle of articles)
+     * - LEADERBOARD (Top horizontal, below navbar)
+     * - HERO_BANNER (Above main headline, premium campaigns)
+     * - SIDEBAR_SKYSCRAPER (Right side vertical)
+     * - INLINE_ARTICLE_TOP (Top of article content)
+     * - INLINE_ARTICLE_MID (Middle of article content)
+     * - INLINE_ARTICLE_BOTTOM (Bottom of article content)
+     * - FOOTER_BANNER (Bottom of page)
+     * - HOME_BANNER (Legacy: Top of home)
+     * - SIDEBAR (Legacy: Right sidebar)
+     * - IN_ARTICLE (Legacy: Middle of articles)
      * - IN_FEED (Between news items)
      * - POPUP (Overlay)
      */
     @Column(name = "placement_zone", nullable = false)
     private String placementZone;
+
+    /**
+     * Ad Size preset (e.g. "728x90", "300x600", "970x250")
+     */
+    @Column(name = "ad_size")
+    private String adSize;
+
+    /**
+     * Ad Behavior:
+     * STATIC, CAROUSEL, SLIDING, ROTATING, STICKY, DYNAMIC
+     */
+    @Column(name = "ad_behavior")
+    @Builder.Default
+    private String adBehavior = "STATIC";
 
     // === CONTENT FIELDS ===
 
@@ -56,6 +77,9 @@ public class Advertisement {
 
     @Column(name = "target_url")
     private String targetUrl; // Destination link for clicks
+
+    @Column(name = "media_transformation")
+    private String mediaTransformation; // Cloudinary transformation string (e.g. c_crop,x_10,y_10,w_100,h_100)
 
     // For Programmatic/Script ads (e.g. AdSense)
     @Column(name = "script_content", columnDefinition = "TEXT")

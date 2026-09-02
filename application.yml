@@ -55,7 +55,7 @@ server:
 
 # JWT Configuration
 jwt:
-  secret: ${JWT_SECRET}
+  secret: ${JWT_SECRET:5r4E2qT4h5y6w7u8i9o0p1q2s3t4u5v6w7x8y9z0a1b=}
   expiration: 86400000 # 24 hours in milliseconds
   refresh-expiration: 604800000 # 7 days in milliseconds
 
