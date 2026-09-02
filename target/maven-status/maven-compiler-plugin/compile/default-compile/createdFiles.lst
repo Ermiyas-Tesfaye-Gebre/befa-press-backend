@@ -163,6 +163,7 @@ com\befapress\service\AnalyticsService.class
 com\befapress\entity\User$UserBuilder.class
 com\befapress\entity\Advertisement.class
 com\befapress\entity\News.class
+com\befapress\dto\request\PaymentRequest.class
 com\befapress\config\WebConfig.class
 com\befapress\entity\SocialShare.class
 com\befapress\dto\analytics\TrafficDataDTO.class
